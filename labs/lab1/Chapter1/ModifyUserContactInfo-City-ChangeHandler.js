@@ -47,11 +47,6 @@ switch(prop.value) {
         address = '3 Praca de Forward Inc';
         state = 'SP';
         postalCode = '04522-050';
-        break;
-    case 'Atlanta':
-        address = '1 Forward Inc Plaza';
-        state = 'NY';
-        postalCode = '10213';
 }
 
 api.getProp('address').value = address;
