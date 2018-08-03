@@ -51,5 +51,16 @@ function parseInitValues(initValues) {
 }
 
 function handleFailure(error) {
-		api.prompt('An error occured while fetching manager\'s information');
+	let errMessage = 'An error occured while fetching manager\'s information';
+	if (error.data.exceptions) {
+		error.data.exceptions.forEach(function (exception) {
+			errMessage += '<br>' + exception.message;
+			if (exception.backendMessages) {
+				exception.backendMessages.forEach(function (backendMessage) {
+					errMessage += '<br>' + backendMessage.message;
+				});
+			}
+		});
+	}
+	api.prompt(errMessage);
 }
