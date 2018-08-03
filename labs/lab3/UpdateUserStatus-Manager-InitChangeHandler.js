@@ -1,7 +1,5 @@
 /* Update User Status form
-Manager property - Initialization and Change handlers
-Notice that when using in the Initialization handler you should 
-add 'return' before the first call to api.service
+Manager property - Change handler
 */
 
 api.service('GetManagerAndAdminRoles', prop.value).then(
