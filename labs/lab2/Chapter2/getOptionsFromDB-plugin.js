@@ -1,13 +1,18 @@
+
+/* "getOptionsFromDB" Javascript plugin code */
+
 function getOptionsFromDB(tabelName, column) {
     load("nashorn:mozilla_compat.js");
-    var options =  "";  
-    try {
-        importPackage(Packages.javax.naming);
-        importPackage(Packages.javax.sql);
-        importPackage(Packages.java.sql);
-        importPackage(Packages.java.util);
+	importPackage(Packages.javax.naming);
+	importPackage(Packages.javax.sql);
+	importPackage(Packages.java.sql);
+	importPackage(Packages.java.util);
+	importPackage( Packages.java.lang.System.out);
     
-        var query ="SELECT * FROM " + tabelName;
+	var options =  new java.util.ArrayList();  
+
+    try {
+        var query ="SELECT * FROM " + tabelName + " ORDER BY " + column;
         var initialContext = new javax.naming.InitialContext();
     
         var dataSource = initialContext.lookup("jboss/datasources/jdbc/sigmadb");
@@ -16,16 +21,20 @@ function getOptionsFromDB(tabelName, column) {
         var resultSet = statement.executeQuery(query);
     
         while (resultSet.next()) {
-        	options += resultSet.getString(column) + '||';
+        	options.add(resultSet.getString(column));
         }
     
         resultSet.close();
         statement.close();
         connection.close();
     }
+    
     catch (err) {
+		java.lang.System.out.println("DEBUG:\n getOptionsFromDB plugin failed: " + err);
         return err;
     }
-  
-  return options;
+    
+	finally {
+		return options;
+	}  
 }
