@@ -30,7 +30,7 @@ function getOptionsFromDB(tabelName, column) {
     }
     
     catch (err) {
-		java.lang.System.out.println("DEBUG:\n getOptionsFromDB plugin failed: " + err);
+		java.lang.System.out.println("PLUGIN ERROR:\n getOptionsFromDB plugin failed: " + err);
         return err;
     }
     
