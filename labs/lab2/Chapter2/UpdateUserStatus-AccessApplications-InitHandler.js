@@ -1,3 +1,8 @@
+
+/* Update User Status form
+Access Applications property - Initialization handler
+*/
+
 return api.server(['getOptionsFromDB','APPLICATION', 'NAME']).then(
     function (response) {
         prop.options = [];
